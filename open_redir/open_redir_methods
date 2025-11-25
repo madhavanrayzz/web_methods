@@ -1,1 +1,36 @@
+Learning : 
+Report 1 : 
+https://auth.dota.trade/login?redirectUrl=https://cs.money///loving-turing-29a494.n
+etlify.app%2523&callbackUrl=https://cs.money///loving-turing-29a494.netlify.app%2523  (///) -> using this only we can found open_redir vulnerbiliy
+
+https://auth.dota.trade/login?redirectUrl=https://cs.money///loving-turing-29a494.netl
+ify.app%2523&callbackUrl=https://cs.money///loving-turing-29a494.netlify.app%2523
+How to find : 
+www.target.com///evil.com
+
+Report 2 : 
+https://app.mopub.com/login?next=https://mopub.com
+In next param : change to evil.com | https://app.mopub.com/login?next=https://evil.com 
+https://app.mopub.com/login?next=javascript:alert("POC")
+
+Report 3: 
+Not in public
+
+Report 4: 
+https://inventory.upserve.com/http://google.com/
+
+just add to end of domain
+
+Report 5:
+Logout Redirection - > GET /?logout=https://qx4lw1nsec.blogspot.com
+while logout it will redirect to malicious site
+
+Report 6:
+In a application QR scanner is present means, it will allow only for thing like send payment or anykind like an 
+GOOGLE PAY
+
+create own QR code with hhtps://evil.com using : https://www.the-qrcode-generator.com/
+then scan it, it will redirect means its a vulnerbility 
+Reference blog : https://shahjerry33.medium.com/open-redirection-qr-code-magic-18ace1a0170f 
+
 
