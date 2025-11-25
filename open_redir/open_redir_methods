@@ -33,4 +33,6 @@ create own QR code with hhtps://evil.com using : https://www.the-qrcode-generato
 then scan it, it will redirect means its a vulnerbility 
 Reference blog : https://shahjerry33.medium.com/open-redirection-qr-code-magic-18ace1a0170f 
 
-
+Report 7 : 
+central.uber.com
+the "state" parameter for "login.uber.com" contained a redirect location instead of a "CSRF token"
