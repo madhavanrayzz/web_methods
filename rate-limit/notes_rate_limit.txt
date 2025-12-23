@@ -1,0 +1,5 @@
+No rate limit on reports for other user comments
+    Visit page https://example.com/blog/page4/report-comment?comment_id=33
+    Report this comment and capture the request in Burpsuite
+    Send this request in burp suite intruder and start the attack
+    After a few minutes, the user comment was deleted
