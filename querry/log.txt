@@ -1,0 +1,6 @@
+(
+  resource.type="firebase_domain"
+  OR resource.type="firebase_app_hosting"
+)
+AND httpRequest.requestMethod:*
+AND httpRequest.requestUrl =~ "^https://mjmj.online/p_"
