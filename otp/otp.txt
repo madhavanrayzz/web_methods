@@ -1,0 +1,9 @@
+Flow:
+Register with Phone A
+Reach OTP page
+Intercept request
+Change phone to Phone B
+OTP arrives on Phone B
+Use that OTP to finish registration for Phone A
+
+
