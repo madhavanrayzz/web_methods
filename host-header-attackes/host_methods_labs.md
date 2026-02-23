@@ -73,3 +73,9 @@ Host: vulnerable-website.com
 Host: evil.com
 X-Forwarded-Host: evil.com
 Forwarded: host=evil.com
+
+
+
+GET /example HTTP/1.1
+    host: evil.com
+Host: vulnerable-website.com
