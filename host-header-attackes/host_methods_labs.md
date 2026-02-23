@@ -90,4 +90,4 @@ Host: vulnerable-website.com
 
 
 Lab1: 
-inject a duplicate host header, then see in the response reflected or not then, inject a dup host and check the header value is refleected in respose or not, if means then 
+inject a duplicate host header, then see in the response reflected or not then, inject a dup host and check the header value is refleected in respose or not, if means then add  an anything with path tooo
