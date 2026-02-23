@@ -79,3 +79,15 @@ Forwarded: host=evil.com
 GET /example HTTP/1.1
     host: evil.com
 Host: vulnerable-website.com
+
+
+
+
+
+
+
+
+
+
+Lab1: 
+inject a duplicate host header, then see in the response reflected or not then, inject a dup host and check the header value is refleected in respose or not, if means then 
