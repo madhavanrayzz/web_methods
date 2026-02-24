@@ -67,3 +67,18 @@ Reconstructs request
 Re-sends request
 
 And that parsing difference is exactly where request smuggling can happen.
+
+
+
+
+Expanded:
+
+Hop 1:
+  TLS handshake
+    └── ALPN → HTTP/2
+
+Hop 2:
+  TLS handshake
+    └── ALPN → HTTP/1.1
+
+Same user request.
