@@ -82,3 +82,31 @@ Hop 2:
     └── ALPN → HTTP/1.1
 
 Same user request.
+-------------------------------------------------------------------------------------------------------------------------------------
+
+
+LAB 1: 
+Content length
+TL
+
+HOP(TLS(ALPN)) - applicattionn layer protocol negosiation
+
+POST / HTTP/1.1
+Host: 0a2a00b70458fdc780b4c15800fa00d3.web-security-academy.net
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 6
+Transfer-Encoding: chunked
+
+0
+
+G
+
+for next person response  : 
+HTTP/1.1 403 Forbidden
+Content-Type: application/json; charset=utf-8
+X-Frame-Options: SAMEORIGIN
+Connection: close
+Content-Length: 27
+
+"Unrecognized method GPOST" 
+
