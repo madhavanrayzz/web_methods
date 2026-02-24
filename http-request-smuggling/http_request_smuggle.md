@@ -16,9 +16,9 @@ Back-end uses Transfer-Encoding → ends at 0, treats GET /admin as next request
 Result: hidden request is smuggled past the front-end
 
 
+-----------------------------------------------------------------
 
-
-Example Explained
+#Example Explained
 Browser → HTTP/2 → CDN → HTTP/1.1 → Backend
 Step 1: Browser → CDN
 
