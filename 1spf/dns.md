@@ -1,3 +1,6 @@
+Domain Information Groper(dig)
+
+
 What is Zone Transfer?
 
 👉 Zone Transfer = copying all DNS records of a domain
