@@ -1,4 +1,5 @@
 Domain Information Groper(dig)
+AXFR = Authoritative Transfer
 
 
 What is Zone Transfer?
