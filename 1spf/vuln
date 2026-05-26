@@ -1,0 +1,27 @@
+SPF + DKIM → result
+↓
+DMARC p= → action
+
+SPF and DKIM give pass/fail results.
+DMARC decides what to do with those results.
+
+p= defines action for main domain
+sp= defines action for subdomains
+
+If sp=none → subdomains are not strictly protected
+but vulnerability only exists if spoofed email reaches inbox
+
+  p = main domain rule
+sp = subdomain rule
+DMARC = decision maker
+
+
+
+  SPF  → Sender Policy Framework
+DKIM → DomainKeys Identified Mail
+DMARC → Domain-based Message Authentication, Reporting & Conformance
+
+p   → Policy (main domain)
+sp  → Subdomain Policy
+rua → Aggregate report email
+ruf → Forensic report email
