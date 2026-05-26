@@ -25,3 +25,7 @@ p   → Policy (main domain)
 sp  → Subdomain Policy
 rua → Aggregate report email
 ruf → Forensic report email
+
+
+adkim → DKIM alignment mode
+aspf  → SPF alignment mode
