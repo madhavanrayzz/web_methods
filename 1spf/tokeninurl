@@ -1,0 +1,14 @@
+Token in URL — Mini Checklist
+Token present?
+?token= / ?session= → if no, ignore
+Does it give access?
+Opens account / resets password → important
+Else → ignore
+Reusable?
+Works in another browser/incognito → 🔴 bad
+Expires?
+Long-lived → worse
+One-time → less impact
+Final call:
+Access + reusable → High
+Limited/temporary → Medium/Low
