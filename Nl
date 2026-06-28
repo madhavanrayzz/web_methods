@@ -2,3 +2,5 @@ security@nwo.nl
 
 responsibledisclosure@adyen.com
 responsible-disclosure@surf.nl
+
+ security@particify.de
