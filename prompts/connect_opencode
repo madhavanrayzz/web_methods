@@ -8,3 +8,5 @@ Do not start a new OAuth flow if token.json exists. Load the existing credential
 
 Implement Gmail API access for reading and sending mail using the scopes already granted in the token.
 Never print the access token or refresh token.
+
+For verfication print the latest email
