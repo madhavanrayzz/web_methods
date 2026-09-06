@@ -1,0 +1,14 @@
+Use the existing Gmail OAuth token at:
+
+bughunter@localhost:~$ cd termux
+bughunter@localhost:~/termux$ ls
+Prompt_to_connect_opencode.txt  gmail_perm_for_token.py
+credentials.json                token.json
+gmail_client.py
+
+Do not start a new OAuth flow if token.json exists. Load the existing credentials and refresh the access token when necessary.
+
+Implement Gmail API access for reading and sending mail using the scopes already granted in the token.
+Never print the access token or refresh token.
+
+For verfication print the latest email
