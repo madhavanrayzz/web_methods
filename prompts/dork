@@ -1,0 +1,23 @@
+site:*.nl (
+"bug bounty" OR
+"bounty" OR
+"reward" OR
+"Hall of Fame" OR
+"security researchers" OR
+"responsible disclosure" OR
+"vulnerability disclosure" OR
+"kwetsbaarheid melden" OR
+"meld een kwetsbaarheid" OR
+"beveiligingslek melden" OR
+"security melding" OR
+"Responsible Disclosure Beleid" OR
+"Responsible Disclosure Policy" OR
+"ethisch hacker" OR
+"ethische hacker" OR
+"beveiligingsonderzoeker" OR
+"security onderzoeker" OR
+"kwetsbaarheid" OR
+"bug melden" OR
+"PayPal" OR
+"€"
+)
