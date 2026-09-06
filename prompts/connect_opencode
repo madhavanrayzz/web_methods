@@ -1,0 +1,10 @@
+Use the existing Gmail OAuth token at:
+/home/sri/opencode/gmail_sec/token.json
+
+Use credentials from:
+/home/sri/opencode/gmail_sec/credentials.json
+
+Do not start a new OAuth flow if token.json exists. Load the existing credentials and refresh the access token when necessary.
+
+Implement Gmail API access for reading and sending mail using the scopes already granted in the token.
+Never print the access token or refresh token.
