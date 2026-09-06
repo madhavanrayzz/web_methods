@@ -1,0 +1,54 @@
+MULTI-ACCOUNT TESTING:
+
+Do NOT artificially limit the number of test accounts to 2, 3, or any
+fixed small number.
+
+The application has many workflows and authorization boundaries. If
+testing requires many independent identities, create as many
+controlled test accounts as necessary, potentially up to 100 or more,
+provided this remains within the bug bounty program's rules, rate
+limits, and reasonable resource usage.
+
+Use the Bugcrowd test identity and meaningful email aliases for the
+accounts. The Gmail MCP is READ-ONLY and exists specifically so the
+verification emails for those accounts can be retrieved.
+
+For example, maintain a local mapping such as:
+
+account-001 → maddybyco+account01@bugcrowdninja.com
+account-002 → maddybyco+account02@bugcrowdninja.com
+account-003 → maddybyco+account03@bugcrowdninja.com
+...
+account-100 → maddybyco+account100@bugcrowdninja.com
+
+Do not assume these exact aliases are required; choose meaningful,
+consistent aliases appropriate to the workflow.
+
+Use separate identities whenever necessary to test:
+
+- horizontal authorization
+- vertical authorization
+- cross-user access
+- cross-organization access
+- resource ownership
+- role changes
+- invitations
+- user/group/role relationships
+- session isolation
+- account recovery
+- account lifecycle
+- business-logic workflows
+- API authorization
+- object-level authorization
+
+For large-scale account creation, keep an organized local account
+inventory containing only the minimum information required for
+testing. Never expose passwords, OAuth tokens, refresh tokens, or
+other secrets in findings/logs.
+
+Do not create accounts merely to inflate the number of accounts.
+Create additional identities when they provide a meaningful testing
+purpose or are required by a workflow.
+
+Before performing a large batch, verify the program's applicable
+account-creation and rate-limit rules. Stay within those limits.
