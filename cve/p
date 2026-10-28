@@ -1,0 +1,6 @@
+Rank	Repository	Stars shown during research	Recent maintenance evidence	Why investigate it?
+1	PHPHR	8	Repository page showed 26 commits; last commit approximately four weeks before this research	HR, employee management, attendance and payroll. Examine authorization boundaries and access to employee records. GitHub
+2	TropaTT	19	Active repository history; thousands of recorded commits	CRM, client portal, roles, APIs, webhooks and file handling offer several areas for code review. GitHub
+3	VonCMS	36	Release history includes v1.26.6	PHP CMS with an admin interface, publishing features and update mechanisms. Inspect authorization, uploads and update verification. GitHub
+4	phpwcms	96	Release 1.12.4 dated October 3, 2026	Established PHP CMS with user management, content processing and extension functionality. Its security policy lists supported versions. GitHub
+5	InstantCMS	
